@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imamnagar Masjid</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --primary:#0f172a;
+ --secondary:#1e293b;
+ --accent:#f59e0b;
+ --accent-light:#fbbf24;
+ --text:#f8fafc;
+ --text-muted:#94a3b8;
+ --glass:rgba(30,41,59,0.8);
+}
+
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+}
+
+html{
+ scroll-behavior:smooth;
+}
+
+body{
+ font-family:'Plus Jakarta Sans',sans-serif;
+ background:var(--primary);
+ color:var(--text);
+ line-height:1.6;
+ overflow-x:hidden;
+}
+
+/* Animated Background */
+.bg-animation{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ z-index:-1;
+ background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);
+ overflow:hidden;
+}
+
+.stars{
+ position:absolute;
+ width:100%;
+ height:100%;
+ background-image:
+  radial-gradient(2px 2px at 20px 30px,#eee,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 40px 70px,rgba(255,255,255,0.8),rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 50px 160px,#ddd,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 90px 40px,#fff,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 130px 80px,rgba(255,255,255,0.6),rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 160px 120px,#ddd,rgba(0,0,0,0));
+ background-repeat:repeat;
+ background-size:200px 200px;
+ animation:twinkle 5s ease-in-out infinite;
+ opacity:0.5;
+}
+
+@keyframes twinkle{
+ 0%,100%{opacity:0.5;}
+ 50%{opacity:0.8;}
+}
+
+/* Header with Image */
+header{
+ position:relative;
+ min-height:80vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:2rem;
+ overflow:hidden;
+}
+
+.mosque-image-container{
+ position:relative;
+ width:90%;
+ max-width:800px;
+ height:400px;
+ margin-bottom:2rem;
+ border-radius:30px;
+ overflow:hidden;
+ box-shadow:0 30px 60px rgba(0,0,0,0.5);
+ animation:fadeInUp 1s ease-out;
+}
+
+.mosque-image{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ transition:transform 10s ease;
+}
+
+.mosque-image-container:hover .mosque-image{
+ transform:scale(1.1);
+}
+
+.image-overlay{
+ position:absolute;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:linear-gradient(to bottom,transparent 0%,rgba(15,23,42,0.8) 100%);
+}
+
+.header-content{
+ position:relative;
+ z-index:2;
+ animation:fadeInUp 1s ease-out 0.3s backwards;
+}
+
+h1{
+ font-size:clamp(2.5rem,5vw,4rem);
+ font-weight:700;
+ margin-bottom:0.5rem;
+ background:linear-gradient(135deg,#fff 0%,var(--accent-light) 100%);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+}
+
+.arabic-title{
+ font-family:'Noto Nastaliq Urdu',serif;
+ font-size:clamp(2rem,4vw,3rem);
+ color:var(--accent);
+ margin-bottom:1rem;
+ line-height:1.8;
+}
+
+/* Main Container */
+.container{
+ max-width:1200px;
+ margin:0 auto;
+ padding:2rem;
+}
+
+/* Total Box */
+.total-box{
+ text-align:center;
+ padding:3rem 2rem;
+ background:linear-gradient(135deg,rgba(245,158,11,0.2) 0%,rgba(245,158,11,0.05) 100%);
+ border:2px solid rgba(245,158,11,0.3);
+ border-radius:24px;
+ margin-bottom:3rem;
+ position:relative;
+ overflow:hidden;
+ animation:fadeInUp 0.8s ease-out;
+}
+
+.total-box::before{
+ content:'';
+ position:absolute;
+ top:-50%;
+ left:-50%;
+ width:200%;
+ height:200%;
+ background:radial-gradient(circle,rgba(245,158,11,0.2) 0%,transparent 70%);
+ animation:rotate 20s linear infinite;
+}
+
+.total-label{
+ font-size:1.2rem;
+ text-transform:uppercase;
+ letter-spacing:0.3em;
+ color:var(--accent);
+ margin-bottom:1rem;
+ position:relative;
+ z-index:1;
+}
+
+.total-amount{
+ font-size:clamp(3rem,8vw,5rem);
+ font-weight:700;
+ position:relative;
+ z-index:1;
+ text-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Search */
+.search-container{
+ max-width:600px;
+ margin:0 auto 3rem;
+ position:relative;
+ animation:fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.search-input{
+ width:100%;
+ padding:1.2rem 1.5rem 1.2rem 3.5rem;
+ background:var(--glass);
+ border:2px solid rgba(255,255,255,0.1);
+ border-radius:16px;
+ color:var(--text);
+ font-size:1.1rem;
+ transition:all 0.3s;
+ backdrop-filter:blur(10px);
+}
+
+.search-input:focus{
+ outline:none;
+ border-color:var(--accent);
+ box-shadow:0 0 0 4px rgba(245,158,11,0.1),0 10px 40px rgba(0,0,0,0.3);
+}
+
+.search-icon{
+ position:absolute;
+ left:1.2rem;
+ top:50%;
+ transform:translateY(-50%);
+ font-size:1.3rem;
+ opacity:0.6;
+}
+
+/* Table */
+.table-container{
+ background:var(--glass);
+ backdrop-filter:blur(20px);
+ border-radius:24px;
+ overflow:hidden;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 25px 50px rgba(0,0,0,0.5);
+ animation:fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.table-header{
+ padding:1.5rem 2rem;
+ background:rgba(255,255,255,0.05);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+thead{
+ background:rgba(245,158,11,0.1);
+}
+
+th{
+ padding:1.2rem 1.5rem;
+ text-align:left;
+ font-weight:600;
+ color:var(--accent);
+ text-transform:uppercase;
+ font-size:0.8rem;
+ letter-spacing:0.1em;
+}
+
+td{
+ padding:1.2rem 1.5rem;
+ border-bottom:1px solid rgba(255,255,255,0.05);
+ transition:all 0.3s;
+}
+
+tbody tr{
+ transition:all 0.3s;
+ animation:fadeIn 0.5s ease-out;
+}
+
+tbody tr:hover{
+ background:rgba(245,158,11,0.1);
+ transform:scale(1.02);
+ box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+tbody tr:hover td{
+ color:var(--accent-light);
+}
+
+.amount-cell{
+ font-weight:700;
+ color:var(--accent);
+ font-size:1.1rem;
+}
+
+.empty-state{
+ text-align:center;
+ padding:4rem 2rem;
+ color:var(--text-muted);
+ display:none;
+}
+
+/* Admin Lock Panel */
+.admin-lock{
+ margin-top:4rem;
+ text-align:center;
+ animation:fadeInUp 0.8s ease-out 0.6s backwards;
+}
+
+.lock-button{
+ display:inline-flex;
+ align-items:center;
+ gap:0.8rem;
+ padding:1rem 2rem;
+ background:var(--glass);
+ border:2px solid rgba(255,255,255,0.1);
+ border-radius:16px;
+ color:var(--text);
+ cursor:pointer;
+ font-size:1rem;
+ transition:all 0.3s;
+ backdrop-filter:blur(10px);
+}
+
+.lock-button:hover{
+ border-color:var(--accent);
+ transform:translateY(-3px);
+ box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.lock-icon{
+ font-size:1.5rem;
+ transition:transform 0.3s;
+}
+
+.lock-button:hover .lock-icon{
+ transform:rotate(10deg);
+}
+
+/* Password Modal */
+.modal-overlay{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:rgba(0,0,0,0.8);
+ backdrop-filter:blur(10px);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:1000;
+ opacity:0;
+ transition:opacity 0.3s;
+}
+
+.modal-overlay.active{
+ display:flex;
+ opacity:1;
+}
+
+.modal{
+ background:var(--secondary);
+ padding:2.5rem;
+ border-radius:24px;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 30px 60px rgba(0,0,0,0.5);
+ max-width:400px;
+ width:90%;
+ transform:scale(0.9);
+ transition:transform 0.3s;
+}
+
+.modal-overlay.active .modal{
+ transform:scale(1);
+}
+
+.modal-title{
+ font-size:1.5rem;
+ margin-bottom:0.5rem;
+ text-align:center;
+}
+
+.modal-subtitle{
+ color:var(--text-muted);
+ text-align:center;
+ margin-bottom:2rem;
+ font-size:0.9rem;
+}
+
+.password-input{
+ width:100%;
+ padding:1rem;
+ background:var(--primary);
+ border:2px solid rgba(255,255,255,0.1);
+ border-radius:12px;
+ color:var(--text);
+ font-size:1.1rem;
+ text-align:center;
+ letter-spacing:0.2em;
+ margin-bottom:1rem;
+}
+
+.password-input:focus{
+ outline:none;
+ border-color:var(--accent);
+}
+
+.modal-buttons{
+ display:flex;
+ gap:1rem;
+}
+
+.modal-btn{
+ flex:1;
+ padding:1rem;
+ border:none;
+ border-radius:12px;
+ cursor:pointer;
+ font-size:1rem;
+ transition:all 0.3s;
+}
+
+.modal-btn.cancel{
+ background:rgba(255,255,255,0.1);
+ color:var(--text);
+}
+
+.modal-btn.cancel:hover{
+ background:rgba(255,255,255,0.2);
+}
+
+.modal-btn.submit{
+ background:var(--accent);
+ color:var(--primary);
+ font-weight:600;
+}
+
+.modal-btn.submit:hover{
+ background:var(--accent-light);
+ transform:translateY(-2px);
+}
+
+.error-msg{
+ color:var(--danger);
+ text-align:center;
+ margin-top:0.5rem;
+ font-size:0.9rem;
+ display:none;
+}
+
+/* Admin Panel (Hidden by default) */
+.admin-panel{
+ display:none;
+ margin-top:2rem;
+ background:var(--glass);
+ backdrop-filter:blur(20px);
+ border-radius:24px;
+ padding:2.5rem;
+ border:1px solid rgba(255,255,255,0.1);
+ animation:slideDown 0.5s ease-out;
+}
+
+.admin-panel.active{
+ display:block;
+}
+
+@keyframes slideDown{
+ from{
+  opacity:0;
+  transform:translateY(-20px);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+.panel-header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:2rem;
+ padding-bottom:1rem;
+ border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.panel-title{
+ display:flex;
+ align-items:center;
+ gap:1rem;
+}
+
+.admin-badge{
+ background:var(--accent);
+ color:var(--primary);
+ padding:0.3rem 0.8rem;
+ border-radius:20px;
+ font-size:0.75rem;
+ font-weight:700;
+ text-transform:uppercase;
+}
+
+.logout-btn{
+ padding:0.5rem 1rem;
+ background:rgba(239,68,68,0.2);
+ color:#ef4444;
+ border:1px solid rgba(239,68,68,0.3);
+ border-radius:8px;
+ cursor:pointer;
+ font-size:0.9rem;
+ transition:all 0.3s;
+}
+
+.logout-btn:hover{
+ background:rgba(239,68,68,0.3);
+}
+
+.form-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:1.5rem;
+ margin-bottom:1.5rem;
+}
+
+.form-group{
+ position:relative;
+}
+
+.form-label{
+ display:block;
+ margin-bottom:0.5rem;
+ color:var(--text-muted);
+ font-size:0.875rem;
+ font-weight:500;
+}
+
+.form-input{
+ width:100%;
+ padding:1rem;
+ background:var(--primary);
+ border:2px solid rgba(255,255,255,0.1);
+ border-radius:12px;
+ color:var(--text);
+ font-size:1rem;
+ transition:all 0.3s;
+}
+
+.form-input:focus{
+ outline:none;
+ border-color:var(--accent);
+}
+
+.submit-btn{
+ width:100%;
+ padding:1.2rem;
+ background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);
+ border:none;
+ border-radius:12px;
+ color:var(--primary);
+ font-size:1.1rem;
+ font-weight:700;
+ cursor:pointer;
+ transition:all 0.3s;
+ position:relative;
+ overflow:hidden;
+}
+
+.submit-btn::before{
+ content:'';
+ position:absolute;
+ top:0;
+ left:-100%;
+ width:100%;
+ height:100%;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+ transition:left 0.6s;
+}
+
+.submit-btn:hover::before{
+ left:100%;
+}
+
+.submit-btn:hover{
+ transform:translateY(-3px);
+ box-shadow:0 15px 40px rgba(245,158,11,0.4);
+}
+
+.image-settings{
+ margin-top:2rem;
+ padding-top:2rem;
+ border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.image-settings h4{
+ margin-bottom:1rem;
+ font-size:1.1rem;
+}
+
+.image-actions{
+ display:flex;
+ gap:1rem;
+ flex-wrap:wrap;
+}
+
+.export-settings{
+ margin-top:2rem;
+ padding-top:2rem;
+ border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.export-settings h4{
+ margin-bottom:1rem;
+ font-size:1.1rem;
+}
+
+.secondary-btn{
+ padding:0.9rem 1.2rem;
+ border-radius:10px;
+ border:1px solid rgba(255,255,255,0.18);
+ background:rgba(255,255,255,0.06);
+ color:var(--text);
+ cursor:pointer;
+ transition:all 0.3s;
+}
+
+.secondary-btn:hover{
+ border-color:var(--accent);
+ background:rgba(245,158,11,0.15);
+}
+
+/* Toast */
+.toast{
+ position:fixed;
+ bottom:2rem;
+ right:2rem;
+ background:var(--glass);
+ backdrop-filter:blur(20px);
+ padding:1.2rem 2rem;
+ border-radius:16px;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 20px 40px rgba(0,0,0,0.4);
+ display:flex;
+ align-items:center;
+ gap:1rem;
+ transform:translateX(400px);
+ transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+ z-index:1000;
+}
+
+.toast.show{
+ transform:translateX(0);
+}
+
+.toast-icon{
+ width:45px;
+ height:45px;
+ background:var(--accent);
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:1.5rem;
+}
+
+/* Animations */
+@keyframes fadeInUp{
+ from{
+  opacity:0;
+  transform:translateY(30px);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+@keyframes fadeIn{
+ from{opacity:0;}
+ to{opacity:1;}
+}
+
+@keyframes rotate{
+ from{transform:rotate(0deg);}
+ to{transform:rotate(360deg);}
+}
+
+/* Responsive */
+@media(max-width:768px){
+ .mosque-image-container{
+  height:250px;
+ }
+ 
+ .container{
+  padding:1rem;
+ }
+ 
+ th,td{
+  padding:1rem;
+  font-size:0.9rem;
+ }
+ 
+ .form-grid{
+  grid-template-columns:1fr;
+ }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-animation">
+ <div class="stars"></div>
+</div>
+
+<header>
+ <div class="mosque-image-container">
+  <img src="Mosue_img" alt="Masjid" class="mosque-image" id="mosqueImage">
+  <div class="image-overlay"></div>
+ </div>
+ 
+ <div class="header-content">
+  <h1>Imamnagar Masjid</h1>
+  <p class="arabic-title">امامنگر مسجد</p>
+  <p style="color:var(--text-muted);font-size:1.1rem;">Community Contribution Management</p>
+ </div>
+</header>
+
+<div class="container">
+ <!-- Total -->
+ <div class="total-box">
+  <div class="total-label">Total Contributions</div>
+  <div class="total-amount" id="totalAmount">₹0</div>
+ </div>
+
+ <!-- Search -->
+ <div class="search-container">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="search" class="search-input" placeholder="Search by name or father's name...">
+ </div>
+
+ <!-- Table -->
+ <div class="table-container">
+  <div class="table-header">
+   <h3 style="font-size:1.2rem;">Contribution Records</h3>
+   <span style="color:var(--text-muted);" id="recordCount">0 records</span>
+  </div>
+  <div style="overflow-x:auto;">
+   <table>
+    <thead>
+     <tr>
+      <th>Name</th>
+      <th>Father's Name</th>
+      <th>Amount</th>
+     </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+   </table>
+  </div>
+  <div id="emptyState" class="empty-state">
+   <div style="font-size:3rem;margin-bottom:1rem;">📭</div>
+   <p>No records found matching your search.</p>
+  </div>
+ </div>
+
+ <!-- Admin Lock -->
+ <div class="admin-lock" id="adminLock">
+  <button class="lock-button" onclick="openModal()">
+   <span class="lock-icon">🔒</span>
+   <span>Admin Access</span>
+  </button>
+ </div>
+
+ <!-- Admin Panel (Hidden) -->
+ <div class="admin-panel" id="adminPanel">
+  <div class="panel-header">
+   <div class="panel-title">
+    <h3>Add New Contribution</h3>
+    <span class="admin-badge">Admin</span>
+   </div>
+   <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+  
+  <form id="addForm" onsubmit="handleSubmit(event)">
+   <div class="form-grid">
+    <div class="form-group">
+     <label class="form-label">Full Name *</label>
+     <input type="text" id="name" class="form-input" placeholder="Enter full name" required>
+    </div>
+    <div class="form-group">
+     <label class="form-label">Father's Name</label>
+     <input type="text" id="father" class="form-input" placeholder="Enter father's name">
+    </div>
+    <div class="form-group">
+     <label class="form-label">Amount (₹) *</label>
+     <input type="number" id="amount" class="form-input" placeholder="Enter amount" min="1" required>
+    </div>
+   </div>
+   <button type="submit" class="submit-btn">Add Contribution</button>
+  </form>
+
+  <div class="image-settings">
+   <h4>Masjid Image Settings</h4>
+   <div class="form-grid">
+    <div class="form-group">
+     <label class="form-label">Image URL (Online Link)</label>
+     <input type="url" id="imageUrlInput" class="form-input" placeholder="https://example.com/masjid.jpg">
+    </div>
+    <div class="form-group">
+     <label class="form-label">Folder Image</label>
+     <input type="text" class="form-input" value="masjid-image" readonly>
+    </div>
+   </div>
+   <div class="image-actions">
+    <button type="button" class="secondary-btn" onclick="setImageFromUrl()">Set From Link</button>
+    <button type="button" class="secondary-btn" onclick="clearSavedImage()">Reset Image</button>
+   </div>
+  </div>
+
+  <div class="export-settings">
+   <h4>Export Records</h4>
+   <div class="image-actions">
+    <button type="button" class="secondary-btn" onclick="downloadAsExcel()">Download Excel</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- Password Modal -->
+<div class="modal-overlay" id="passwordModal">
+ <div class="modal">
+  <h3 class="modal-title">🔐 Admin Login</h3>
+  <p class="modal-subtitle">Enter password to access admin panel</p>
+  <input type="password" id="passwordInput" class="password-input" placeholder="••••••" maxlength="6">
+  <div class="error-msg" id="errorMsg">Incorrect password!</div>
+  <div class="modal-buttons">
+   <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+   <button class="modal-btn submit" onclick="checkPassword()">Unlock</button>
+  </div>
+ </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+ <div class="toast-icon">✓</div>
+ <div>
+  <div style="font-weight:700;">Success!</div>
+  <div style="color:var(--text-muted);font-size:0.9rem;">Record added successfully</div>
+ </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+// Password - Change this to your desired password
+const ADMIN_PASSWORD = "786786";
+const DEFAULT_MOSQUE_IMAGE = "Mosue_img";
+const FOLDER_MOSQUE_IMAGES = [
+ "masjid-image.png",
+ "masjid-image.jpg",
+ "masjid-image.jpeg",
+ "masjid-image.webp",
+ "masjid-image.gif"
+];
+const LINK_IMAGE_KEY = "masjidImageLink";
+
+let data=[
+ {name:"MD. Qaisar Hasan",father:"MD. Yunus Marhoom",amount:25000},
+ {name:"Talat Raza",father:"Abdul Hakim (M)",amount:20000},
+ {name:"MD. Murshid",father:"MD. Yunus Marhoom",amount:12000},
+ {name:"Shabbir Ahmed",father:"Afaq Ahmad (M)",amount:11000},
+ {name:"Shahzadi Begam",father:"Abdul Hakim (M)",amount:10000},
+ {name:"Mahfooz",father:"Abdul Hakim (M)",amount:5000},
+ {name:"Afzal Imam",father:"Hasan Imam (M)",amount:5000},
+ {name:"MD. Vadud",father:"Khurshid Alam (M)",amount:5000},
+ {name:"MD. Harun",father:"Yusuf (M)",amount:5000},
+ {name:"Rahmatullah",father:"Ehsanul Haque",amount:3000},
+ {name:"MD. Nahid",father:"Qairsar Hasan",amount:2000},
+ {name:"Md. Vahid",father:"Md. Shadruddin (M)",amount:2000},
+ {name:"Nurul Hoda",father:"Parveen Khatoon",amount:2000},
+ {name:"Shamim Dubai",father:"Friend",amount:2000},
+ {name:"Md. Riyaz Uddin",father:"Abdul Quddus (M)",amount:2000},
+ {name:"Warish",father:"Shahzad Raza",amount:2000},
+ {name:"Md. Chand",father:"Nizam Uddin (M)",amount:2000},
+ {name:"Sheru",father:"Abdul Mazid (M)",amount:2000},
+ {name:"Azadul Haque",father:"Anwarul Haque (M)",amount:2000},
+ {name:"Md. Rahman",father:"Sharafat karim(M)",amount:2000},
+ {name:"MD. Shahbaz",father:"",amount:2000},
+ {name:"Md. Shamsad",father:"Anwar Sivan (DOS)",amount:2000},
+ {name:"Tabrez Alam",father:"Shamsir Alam",amount:2000},
+ {name:"Adil Ahmad",father:"Yunus Ahmad",amount:1600},
+ {name:"Atif Alam",father:"Md. Aurangzeb",amount:1500},
+ {name:"Zishan Khan",father:"Shahid Khan",amount:1400},
+ {name:"Faizan Khan",father:"Shahid khan",amount:1000},
+ {name:"Shakib Khan",father:"Shahid khan",amount:1000},
+ {name:"Mustfa ALam",father:"Murtza Alam",amount:1000},
+ {name:"Shamshad Alam",father:"Shamsir Alam",amount:1000},
+ {name:"Md. Jawed",father:"Zaki Ahmed",amount:1000},
+ {name:"Syyed Faraz",father:"Syyed Farukh",amount:1000},
+ {name:"Danish Alam",father:"Moti-ul Rahman",amount:1000},
+ {name:"Md Shaif",father:"Shultan Ahmed",amount:1000},
+ {name:"Irshad Raja",father:"Shamsad Raja",amount:1000},
+ {name:"Md Jamsed",father:"Md Chand",amount:1000},
+ {name:"Md Uman",father:"Syyed Sharafat Karim",amount:1000},
+ {name:"Makshud Alam",father:"Khursid Alam",amount:1000},
+ {name:"Md Mehdi",father:"",amount:1000},
+ {name:"Md. Dulara",father:"Rafakat Karim",amount:1000},
+ {name:"Md Shadab",father:"Nashim Uddin",amount:500},
+ {name:"Md Shahid",father:"Nashim Uddin",amount:500},
+ {name:"Shamim Dubai",father:"Friend",amount:5000},
+ {name:"Anonymous",father:"Anonymous",amount:1000},
+ {name:"Anonymous",father:"Anonymous",amount:1000},
+ {name:"Anonymous",father:"Anonymous",amount:1000},
+ {name:"Anonymous",father:"Anonymous",amount:1000},
+ {name:"Anonymous",father:"Anonymous",amount:1000},
+ {name:"Anonymous",father:"Anonymous",amount:1000}
+];
+
+function formatCurrency(amount){
+ return '₹'+amount.toLocaleString('en-IN');
+}
+
+function animateValue(id,end,duration){
+ const obj=document.getElementById(id);
+ const start=0;
+ const range=end-start;
+ const stepTime=Math.abs(Math.floor(duration/range));
+ let current=start;
+ 
+ const timer=setInterval(()=>{
+  current+=Math.ceil(range/50);
+  if(current>=end){
+   current=end;
+   clearInterval(timer);
+  }
+  obj.innerHTML=formatCurrency(current);
+ },20);
+}
+
+function updateTotal(){
+ const total=data.reduce((sum,item)=>sum+item.amount,0);
+ animateValue('totalAmount',total,2000);
+}
+
+function renderTable(list){
+ const tbody=document.getElementById('tableBody');
+ const emptyState=document.getElementById('emptyState');
+ const countEl=document.getElementById('recordCount');
+ 
+ if(list.length===0){
+  tbody.innerHTML='';
+  emptyState.style.display='block';
+  countEl.textContent='0 records';
+  return;
+ }
+ 
+ emptyState.style.display='none';
+ countEl.textContent=`${list.length} records`;
+ 
+ tbody.innerHTML=list.map((item,index)=>`
+  <tr style="animation:fadeIn 0.5s ease-out ${index*0.03}s backwards">
+   <td><strong>${item.name}</strong></td>
+   <td>${item.father||'-'}</td>
+   <td class="amount-cell">${formatCurrency(item.amount)}</td>
+  </tr>
+ `).join('');
+}
+
+function applySearch(){
+ const searchTerm=document.getElementById('search').value.toLowerCase();
+ const filtered=data.filter(d=>
+  d.name.toLowerCase().includes(searchTerm)||
+  (d.father&&d.father.toLowerCase().includes(searchTerm))
+ );
+ renderTable(filtered);
+}
+
+// Password Modal
+function openModal(){
+ document.getElementById('passwordModal').classList.add('active');
+ document.getElementById('passwordInput').value='';
+ document.getElementById('errorMsg').style.display='none';
+ setTimeout(()=>document.getElementById('passwordInput').focus(),100);
+}
+
+function closeModal(){
+ document.getElementById('passwordModal').classList.remove('active');
+}
+
+function checkPassword(){
+ const input=document.getElementById('passwordInput').value;
+ if(input===ADMIN_PASSWORD){
+  closeModal();
+  document.getElementById('adminLock').style.display='none';
+  document.getElementById('adminPanel').classList.add('active');
+  showToast('Admin access granted!');
+ }else{
+  document.getElementById('errorMsg').style.display='block';
+  document.getElementById('passwordInput').value='';
+  document.getElementById('passwordInput').focus();
+ }
+}
+
+function logout(){
+ document.getElementById('adminPanel').classList.remove('active');
+ document.getElementById('adminLock').style.display='block';
+}
+
+// Handle Enter key in password input
+document.getElementById('passwordInput')?.addEventListener('keypress',(e)=>{
+ if(e.key==='Enter')checkPassword();
+});
+
+// Close modal on overlay click
+document.getElementById('passwordModal').addEventListener('click',(e)=>{
+ if(e.target===document.getElementById('passwordModal'))closeModal();
+});
+
+function handleSubmit(e){
+ e.preventDefault();
+ const name=document.getElementById('name').value.trim();
+ const father=document.getElementById('father').value.trim();
+ const amount=parseInt(document.getElementById('amount').value);
+ 
+ if(!name||!amount)return;
+ 
+ data.unshift({name,father,amount});
+ 
+ document.getElementById('addForm').reset();
+ showToast('Contribution added successfully!');
+ updateTotal();
+ applySearch();
+}
+
+function showToast(msg){
+ const toast=document.getElementById('toast');
+ toast.querySelector('div:last-child div:last-child').textContent=msg;
+ toast.classList.add('show');
+ setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+function setMosqueImage(src){
+ const imageEl=document.getElementById('mosqueImage');
+ if(!imageEl)return;
+ imageEl.src=src;
+}
+
+function showFolderImage(){
+ const imageEl=document.getElementById('mosqueImage');
+ if(!imageEl)return;
+ let index=0;
+ const tryNext=()=>{
+  if(index>=FOLDER_MOSQUE_IMAGES.length){
+   imageEl.onerror=null;
+   imageEl.src=DEFAULT_MOSQUE_IMAGE;
+   return;
+  }
+  imageEl.src=FOLDER_MOSQUE_IMAGES[index++];
+ };
+ imageEl.onerror=tryNext;
+ tryNext();
+}
+
+function setImageFromUrl(){
+ const urlInput=document.getElementById('imageUrlInput');
+ const url=(urlInput.value||'').trim();
+ if(!url){
+  showToast('Please enter image URL first.');
+  return;
+ }
+ try{
+  new URL(url);
+  localStorage.setItem(LINK_IMAGE_KEY,url);
+  setMosqueImage(url);
+  showToast('Image updated from link.');
+ }catch(err){
+  showToast('Invalid URL. Please check the link.');
+ }
+}
+
+function clearSavedImage(){
+ localStorage.removeItem(LINK_IMAGE_KEY);
+ const urlInput=document.getElementById('imageUrlInput');
+ if(urlInput)urlInput.value='';
+ showFolderImage();
+ showToast('Folder image active now.');
+}
+
+function initializeSavedImage(){
+ try{
+  const linkImage=localStorage.getItem(LINK_IMAGE_KEY);
+  if(linkImage){
+   setMosqueImage(linkImage);
+  }else{
+   showFolderImage();
+  }
+ }catch(err){
+  showFolderImage();
+ }
+}
+
+function getExportFilePrefix(){
+ const datePart=new Date().toISOString().slice(0,10);
+ return `imamnagar_masjid_records_${datePart}`;
+}
+
+function downloadAsExcel(){
+ if(typeof XLSX==='undefined'){
+  showToast('Excel library not loaded. Please refresh.');
+  return;
+ }
+
+ const excelData=data.map((item,index)=>({
+  "S.No":index+1,
+  "Name":item.name,
+  "Father Name":item.father||'',
+  "Amount":item.amount
+ }));
+
+ const total=data.reduce((sum,item)=>sum+item.amount,0);
+ excelData.push({
+  "S.No":'',
+  "Name":'TOTAL',
+  "Father Name":'',
+  "Amount":total
+ });
+
+ const worksheet=XLSX.utils.json_to_sheet(excelData);
+ const workbook=XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(workbook,worksheet,'Contributions');
+ XLSX.writeFile(workbook,`${getExportFilePrefix()}.xlsx`);
+ showToast('Excel downloaded successfully.');
+}
+
+// Search listener
+document.getElementById('search').addEventListener('input',applySearch);
+
+// Initialize
+initializeSavedImage();
+updateTotal();
+renderTable(data);
+</script>
+
+</body>
+</html>
