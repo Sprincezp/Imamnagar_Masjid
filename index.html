@@ -11,6 +11,7 @@
  --secondary:#1e293b;
  --accent:#f59e0b;
  --accent-light:#fbbf24;
+ --danger:#ef4444;
  --text:#f8fafc;
  --text-muted:#94a3b8;
  --glass:rgba(30,41,59,0.8);
@@ -63,9 +64,28 @@ body{
  opacity:0.5;
 }
 
+.bg-orb{
+ position:absolute;
+ width:40vw;
+ height:40vw;
+ max-width:420px;
+ max-height:420px;
+ border-radius:50%;
+ background:radial-gradient(circle,rgba(245,158,11,0.26) 0%,rgba(245,158,11,0) 68%);
+ right:-10vw;
+ top:10vh;
+ filter:blur(6px);
+ animation:floatOrb 14s ease-in-out infinite;
+}
+
 @keyframes twinkle{
  0%,100%{opacity:0.5;}
  50%{opacity:0.8;}
+}
+
+@keyframes floatOrb{
+ 0%,100%{transform:translate3d(0,0,0);}
+ 50%{transform:translate3d(-8vw,6vh,0);}
 }
 
 /* Header with Image */
@@ -97,11 +117,14 @@ header{
  width:100%;
  height:100%;
  object-fit:cover;
- transition:transform 10s ease;
+ transition:transform 12s cubic-bezier(0.22,1,0.36,1);
+ animation:kenBurns 16s cubic-bezier(0.22,1,0.36,1) infinite alternate;
+ will-change:transform;
 }
 
 .mosque-image-container:hover .mosque-image{
- transform:scale(1.1);
+ transform:scale(1.12);
+ animation-play-state:paused;
 }
 
 .image-overlay{
@@ -193,6 +216,52 @@ h1{
  animation:fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
+.search-summary{
+ margin:-1.5rem auto 2rem;
+ max-width:600px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:0.9rem;
+ opacity:0;
+ transform:translateY(12px);
+ transition:opacity 0.35s ease,transform 0.35s ease;
+ pointer-events:none;
+}
+
+.search-summary.active{
+ opacity:1;
+ transform:translateY(0);
+ pointer-events:auto;
+}
+
+.search-result-card{
+ background:rgba(245,158,11,0.12);
+ border:1px solid rgba(245,158,11,0.32);
+ border-radius:14px;
+ padding:0.9rem 1rem;
+ animation:popIn 0.4s ease;
+}
+
+.result-name{
+ font-weight:600;
+ font-size:0.95rem;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+
+.result-amount{
+ font-size:1.15rem;
+ font-weight:700;
+ color:var(--accent-light);
+ margin-top:0.25rem;
+}
+
+.result-count{
+ font-size:0.78rem;
+ color:var(--text-muted);
+}
+
 .search-input{
  width:100%;
  padding:1.2rem 1.5rem 1.2rem 3.5rem;
@@ -231,12 +300,71 @@ h1{
  animation:fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
+.animate-on-scroll{
+ opacity:0;
+ transform:translateY(20px);
+ transition:opacity 0.7s ease,transform 0.7s ease;
+}
+
+.animate-on-scroll.visible{
+ opacity:1;
+ transform:translateY(0);
+}
+
 .table-header{
  padding:1.5rem 2rem;
  background:rgba(255,255,255,0.05);
  display:flex;
  justify-content:space-between;
  align-items:center;
+ gap:1rem;
+ flex-wrap:wrap;
+}
+
+.table-header-controls{
+ display:flex;
+ align-items:center;
+ gap:0.8rem;
+ flex-wrap:wrap;
+}
+
+.page-size-select{
+ padding:0.5rem 0.65rem;
+ border-radius:10px;
+ border:1px solid rgba(255,255,255,0.16);
+ background:rgba(255,255,255,0.08);
+ color:var(--text);
+}
+
+.pager{
+ display:flex;
+ align-items:center;
+ gap:0.5rem;
+}
+
+.pager-btn{
+ padding:0.45rem 0.75rem;
+ border-radius:9px;
+ border:1px solid rgba(255,255,255,0.16);
+ background:rgba(255,255,255,0.08);
+ color:var(--text);
+ cursor:pointer;
+ transition:all 0.25s ease;
+}
+
+.pager-btn:hover:not(:disabled){
+ border-color:var(--accent);
+ background:rgba(245,158,11,0.12);
+}
+
+.pager-btn:disabled{
+ opacity:0.45;
+ cursor:not-allowed;
+}
+
+.pager-status{
+ font-size:0.85rem;
+ color:var(--text-muted);
 }
 
 table{
@@ -677,6 +805,23 @@ tbody tr:hover td{
  to{transform:rotate(360deg);}
 }
 
+@keyframes kenBurns{
+ 0%{transform:scale(1) translate3d(0,0,0);}
+ 50%{transform:scale(1.06) translate3d(0,-6px,0);}
+ 100%{transform:scale(1.1) translate3d(0,-10px,0);}
+}
+
+@keyframes popIn{
+ from{
+  opacity:0;
+  transform:translateY(10px) scale(0.98);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0) scale(1);
+ }
+}
+
 /* Responsive */
 @media(max-width:768px){
  .mosque-image-container{
@@ -695,6 +840,33 @@ tbody tr:hover td{
  .form-grid{
   grid-template-columns:1fr;
  }
+
+ .table-header{
+  padding:1rem;
+ }
+}
+
+@media(hover:none){
+ .mosque-image{
+  animation:kenBurns 14s cubic-bezier(0.22,1,0.36,1) infinite alternate;
+ }
+
+ tbody tr:hover{
+  transform:none;
+  box-shadow:none;
+  background:transparent;
+ }
+
+ tbody tr:active{
+  background:rgba(245,158,11,0.12);
+ }
+}
+
+@media(prefers-reduced-motion:reduce){
+ *{
+  animation:none !important;
+  transition:none !important;
+ }
 }
 </style>
 </head>
@@ -702,6 +874,7 @@ tbody tr:hover td{
 
 <div class="bg-animation">
  <div class="stars"></div>
+ <div class="bg-orb"></div>
 </div>
 
 <header>
@@ -719,22 +892,37 @@ tbody tr:hover td{
 
 <div class="container">
  <!-- Total -->
- <div class="total-box">
+ <div class="total-box animate-on-scroll">
   <div class="total-label">Total Contributions</div>
   <div class="total-amount" id="totalAmount">₹0</div>
  </div>
 
  <!-- Search -->
- <div class="search-container">
+ <div class="search-container animate-on-scroll">
   <span class="search-icon">🔍</span>
   <input type="text" id="search" class="search-input" placeholder="Search by name or father's name...">
  </div>
 
+ <div id="searchSummary" class="search-summary" aria-live="polite"></div>
+
  <!-- Table -->
- <div class="table-container">
+ <div class="table-container animate-on-scroll">
   <div class="table-header">
    <h3 style="font-size:1.2rem;">Contribution Records</h3>
-   <span style="color:var(--text-muted);" id="recordCount">0 records</span>
+   <div class="table-header-controls">
+    <span style="color:var(--text-muted);" id="recordCount">0 records</span>
+    <label for="pageSize" style="color:var(--text-muted);font-size:0.85rem;">View</label>
+    <select id="pageSize" class="page-size-select" onchange="handlePageSizeChange()">
+     <option value="50" selected>50</option>
+     <option value="100">100</option>
+     <option value="all">All data</option>
+    </select>
+    <div class="pager">
+     <button type="button" id="prevBtn" class="pager-btn" onclick="changePage(-1)">Prev</button>
+     <span id="pageStatus" class="pager-status">Page 1/1</span>
+     <button type="button" id="nextBtn" class="pager-btn" onclick="changePage(1)">Next</button>
+    </div>
+   </div>
   </div>
   <div style="overflow-x:auto;">
    <table>
@@ -755,7 +943,7 @@ tbody tr:hover td{
  </div>
 
  <!-- Admin Lock -->
- <div class="admin-lock" id="adminLock">
+ <div class="admin-lock animate-on-scroll" id="adminLock">
   <button class="lock-button" onclick="openModal()">
    <span class="lock-icon">🔒</span>
    <span>Admin Access</span>
@@ -875,7 +1063,7 @@ let data=[
  {name:"Sheru",father:"Abdul Mazid Marhoom",amount:2000},
  {name:"Azadul Haque",father:"Anwarul Haque Marhoom",amount:2000},
  {name:"Md. Rahman",father:"Sharafat karimMarhoom",amount:2000},
- {name:"MD. Shahbaz",father:"",amount:2000},
+ {name:"MD. Shahbaz",father:"Sayyad Jalaluddin",amount:2000},
  {name:"Md. Shamsad",father:"Anwar Sivan (DOS)",amount:2000},
  {name:"Tabrez Alam",father:"Shamsir Alam",amount:2000},
  {name:"Adil Ahmad",father:"Yunus Ahmad",amount:1600},
@@ -905,26 +1093,38 @@ let data=[
  {name:"Anonymous",father:"Anonymous",amount:1000},
  {name:"Anonymous",father:"Anonymous",amount:1000}
 ];
+let filteredData=[...data];
+let currentPage=1;
+let pageSize=50;
 
 function formatCurrency(amount){
  return '₹'+amount.toLocaleString('en-IN');
 }
 
+function animateCurrencyToElement(element,end,duration=1200){
+ if(!element)return;
+ const target=Math.max(0,Number(end)||0);
+ const from=Math.max(0,Number(element.dataset.value)||0);
+ const startTime=performance.now();
+ const easeOut=(t)=>1-Math.pow(1-t,3);
+
+ function frame(now){
+  const progress=Math.min((now-startTime)/duration,1);
+  const value=Math.round(from+(target-from)*easeOut(progress));
+  element.textContent=formatCurrency(value);
+  if(progress<1){
+   requestAnimationFrame(frame);
+  }else{
+   element.dataset.value=String(target);
+  }
+ }
+
+ requestAnimationFrame(frame);
+}
+
 function animateValue(id,end,duration){
  const obj=document.getElementById(id);
- const start=0;
- const range=end-start;
- const stepTime=Math.abs(Math.floor(duration/range));
- let current=start;
- 
- const timer=setInterval(()=>{
-  current+=Math.ceil(range/50);
-  if(current>=end){
-   current=end;
-   clearInterval(timer);
-  }
-  obj.innerHTML=formatCurrency(current);
- },20);
+ animateCurrencyToElement(obj,end,duration);
 }
 
 function updateTotal(){
@@ -936,18 +1136,37 @@ function renderTable(list){
  const tbody=document.getElementById('tableBody');
  const emptyState=document.getElementById('emptyState');
  const countEl=document.getElementById('recordCount');
+ const pageStatusEl=document.getElementById('pageStatus');
+ const prevBtn=document.getElementById('prevBtn');
+ const nextBtn=document.getElementById('nextBtn');
+ const isAllMode=pageSize==='all';
+ const perPage=isAllMode?Math.max(1,list.length):Math.max(1,Number(pageSize)||50);
+ const totalPages=isAllMode?1:Math.max(1,Math.ceil(list.length/perPage));
+ currentPage=Math.min(Math.max(currentPage,1),totalPages);
  
  if(list.length===0){
   tbody.innerHTML='';
   emptyState.style.display='block';
   countEl.textContent='0 records';
+  if(pageStatusEl)pageStatusEl.textContent='Page 0/0';
+  if(prevBtn)prevBtn.disabled=true;
+  if(nextBtn)nextBtn.disabled=true;
   return;
  }
  
  emptyState.style.display='none';
  countEl.textContent=`${list.length} records`;
- 
- tbody.innerHTML=list.map((item,index)=>`
+ const start=isAllMode?0:(currentPage-1)*perPage;
+ const end=isAllMode?list.length:(start+perPage);
+ const pageItems=list.slice(start,end);
+
+ if(pageStatusEl){
+  pageStatusEl.textContent=isAllMode?'Showing all':`Page ${currentPage}/${totalPages}`;
+ }
+ if(prevBtn)prevBtn.disabled=isAllMode||currentPage<=1;
+ if(nextBtn)nextBtn.disabled=isAllMode||currentPage>=totalPages;
+
+ tbody.innerHTML=pageItems.map((item,index)=>`
   <tr style="animation:fadeIn 0.5s ease-out ${index*0.03}s backwards">
    <td><strong>${item.name}</strong></td>
    <td>${item.father||'-'}</td>
@@ -956,13 +1175,96 @@ function renderTable(list){
  `).join('');
 }
 
+function handlePageSizeChange(){
+ const selector=document.getElementById('pageSize');
+ if(!selector)return;
+ pageSize=selector.value==='all'?'all':Number(selector.value)||50;
+ currentPage=1;
+ renderTable(filteredData);
+}
+
+function changePage(delta){
+ const isAllMode=pageSize==='all';
+ if(isAllMode)return;
+ const perPage=Math.max(1,Number(pageSize)||50);
+ const totalPages=Math.max(1,Math.ceil(filteredData.length/perPage));
+ const nextPage=Math.min(Math.max(currentPage+delta,1),totalPages);
+ if(nextPage===currentPage)return;
+ currentPage=nextPage;
+ renderTable(filteredData);
+}
+
+function normalizeName(name){
+ return (name||'').trim().replace(/\s+/g,' ').toLowerCase();
+}
+
+function escapeHtml(text){
+ return String(text)
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+}
+
+function updateSearchSummary(searchTerm,filteredList){
+ const summaryEl=document.getElementById('searchSummary');
+ const term=(searchTerm||'').trim().toLowerCase();
+ if(!summaryEl)return;
+
+ if(!term){
+  summaryEl.innerHTML='';
+  summaryEl.classList.remove('active');
+  return;
+ }
+
+ const grouped=new Map();
+ filteredList.forEach(item=>{
+  const key=normalizeName(item.name);
+  if(!key)return;
+  const existing=grouped.get(key);
+  if(existing){
+   existing.total+=item.amount;
+   existing.entries+=1;
+  }else{
+   grouped.set(key,{name:item.name,total:item.amount,entries:1});
+  }
+ });
+
+ const cards=[...grouped.values()]
+  .sort((a,b)=>b.total-a.total)
+  .slice(0,6);
+
+ if(cards.length===0){
+  summaryEl.innerHTML='<div class="search-result-card"><div class="result-name">No matching person</div><div class="result-count">Try a different name.</div></div>';
+  summaryEl.classList.add('active');
+  return;
+ }
+
+ summaryEl.innerHTML=cards.map((card,index)=>`
+  <div class="search-result-card" style="animation-delay:${index*0.05}s">
+   <div class="result-name">${escapeHtml(card.name)}</div>
+   <div class="result-amount" data-target="${card.total}">${formatCurrency(0)}</div>
+   <div class="result-count">${card.entries} entr${card.entries===1?'y':'ies'} total</div>
+  </div>
+ `).join('');
+
+ summaryEl.classList.add('active');
+ summaryEl.querySelectorAll('.result-amount').forEach((el)=>{
+  animateCurrencyToElement(el,Number(el.dataset.target)||0,900);
+ });
+}
+
 function applySearch(){
  const searchTerm=document.getElementById('search').value.toLowerCase();
  const filtered=data.filter(d=>
   d.name.toLowerCase().includes(searchTerm)||
   (d.father&&d.father.toLowerCase().includes(searchTerm))
  );
- renderTable(filtered);
+ filteredData=filtered;
+ currentPage=1;
+ renderTable(filteredData);
+ updateSearchSummary(searchTerm,filtered);
 }
 
 // Password Modal
@@ -1125,10 +1427,31 @@ function downloadAsExcel(){
 // Search listener
 document.getElementById('search').addEventListener('input',applySearch);
 
+function setupScrollAnimations(){
+ const items=document.querySelectorAll('.animate-on-scroll');
+ if(!('IntersectionObserver' in window)){
+  items.forEach(item=>item.classList.add('visible'));
+  return;
+ }
+
+ const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:0.12});
+
+ items.forEach(item=>observer.observe(item));
+}
+
 // Initialize
 initializeSavedImage();
 updateTotal();
-renderTable(data);
+renderTable(filteredData);
+updateSearchSummary('',data);
+setupScrollAnimations();
 </script>
 
 </body>
