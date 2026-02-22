@@ -1010,7 +1010,7 @@ tbody tr:hover td{
  <div class="modal">
   <h3 class="modal-title">🔐 Admin Login</h3>
   <p class="modal-subtitle">Enter password to access admin panel</p>
-  <input type="password" id="passwordInput" class="password-input" placeholder="••••••" maxlength="6">
+  <input type="password" id="passwordInput" class="password-input" placeholder="••••••" maxlength="64" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false">
   <div class="error-msg" id="errorMsg">Incorrect password!</div>
   <div class="modal-buttons">
    <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
@@ -1030,8 +1030,13 @@ tbody tr:hover td{
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
-// Password - Change this to your desired password
-const ADMIN_PASSWORD = "786786";
+// Password security:
+const ADMIN_PASSWORD_SALT = "imamnagar-admin-v1";
+const ADMIN_PASSWORD_HASH = "33d1e7bf335e4ba45096df95ef293f2d0d3ebd3d622ad592cbc580c8dc626621";
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOGIN_LOCK_MS = 30000;
+let failedLoginAttempts = 0;
+let loginLockUntil = 0;
 const DEFAULT_MOSQUE_IMAGE = "Mosue_img";
 const FOLDER_MOSQUE_IMAGES = [
  "masjid-image.png",
@@ -1267,6 +1272,24 @@ function applySearch(){
  updateSearchSummary(searchTerm,filtered);
 }
 
+async function sha256Hex(input){
+ const data=new TextEncoder().encode(input);
+ const digest=await crypto.subtle.digest('SHA-256',data);
+ return [...new Uint8Array(digest)].map((b)=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function verifyAdminPassword(password){
+ const saltedValue=`${ADMIN_PASSWORD_SALT}:${password}`;
+ const hashedInput=await sha256Hex(saltedValue);
+ return hashedInput===ADMIN_PASSWORD_HASH;
+}
+
+function setLoginError(message){
+ const errorEl=document.getElementById('errorMsg');
+ errorEl.textContent=message;
+ errorEl.style.display='block';
+}
+
 // Password Modal
 function openModal(){
  document.getElementById('passwordModal').classList.add('active');
@@ -1279,17 +1302,42 @@ function closeModal(){
  document.getElementById('passwordModal').classList.remove('active');
 }
 
-function checkPassword(){
- const input=document.getElementById('passwordInput').value;
- if(input===ADMIN_PASSWORD){
+async function checkPassword(){
+ const now=Date.now();
+ if(now<loginLockUntil){
+  const seconds=Math.ceil((loginLockUntil-now)/1000);
+  setLoginError(`Too many attempts. Try again in ${seconds}s.`);
+  return;
+ }
+
+ const inputEl=document.getElementById('passwordInput');
+ const input=inputEl.value;
+
+ if(!input){
+  setLoginError('Please enter password.');
+  return;
+ }
+
+ const isValid=await verifyAdminPassword(input);
+ if(isValid){
+  failedLoginAttempts=0;
+  loginLockUntil=0;
   closeModal();
   document.getElementById('adminLock').style.display='none';
   document.getElementById('adminPanel').classList.add('active');
   showToast('Admin access granted!');
  }else{
-  document.getElementById('errorMsg').style.display='block';
-  document.getElementById('passwordInput').value='';
-  document.getElementById('passwordInput').focus();
+  failedLoginAttempts+=1;
+  if(failedLoginAttempts>=MAX_LOGIN_ATTEMPTS){
+   loginLockUntil=Date.now()+LOGIN_LOCK_MS;
+   failedLoginAttempts=0;
+   setLoginError('Too many attempts. Locked for 30s.');
+  }else{
+   const attemptsLeft=MAX_LOGIN_ATTEMPTS-failedLoginAttempts;
+   setLoginError(`Incorrect password! ${attemptsLeft} attempt(s) left.`);
+  }
+  inputEl.value='';
+  inputEl.focus();
  }
 }
 
@@ -1456,5 +1504,4 @@ setupScrollAnimations();
 
 </body>
 </html>
-
 
