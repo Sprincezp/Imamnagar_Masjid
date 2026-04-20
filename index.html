@@ -78,6 +78,25 @@ body{
  animation:floatOrb 14s ease-in-out infinite;
 }
 
+.bg-orb-2{
+ position:absolute;
+ width:30vw;
+ height:30vw;
+ max-width:320px;
+ max-height:320px;
+ border-radius:50%;
+ background:radial-gradient(circle,rgba(16,185,129,0.15) 0%,rgba(16,185,129,0) 68%);
+ left:-8vw;
+ bottom:15vh;
+ filter:blur(8px);
+ animation:floatOrb2 18s ease-in-out infinite;
+}
+
+@keyframes floatOrb2{
+ 0%,100%{transform:translate3d(0,0,0);}
+ 50%{transform:translate3d(6vw,-5vh,0);}
+}
+
 @keyframes twinkle{
  0%,100%{opacity:0.5;}
  50%{opacity:0.8;}
@@ -872,9 +891,25 @@ tbody tr:hover td{
 </head>
 <body>
 
+<!-- === NAV START === -->
+<nav style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 2rem;">
+ <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:60px;">
+  <a href="#" style="display:flex;align-items:center;gap:0.7rem;text-decoration:none;color:var(--text);">
+   <div style="width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--accent-light));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;">🕌</div>
+   <span style="font-weight:700;font-size:0.95rem;">Imamnagar Masjid</span>
+  </a>
+  <div style="display:flex;gap:0.4rem;">
+   <a href="index.html" style="padding:0.45rem 1rem;border-radius:9px;text-decoration:none;font-size:0.85rem;font-weight:500;color:var(--accent);background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);">Contributions</a>
+   <a href="expenses.html" style="padding:0.45rem 1rem;border-radius:9px;text-decoration:none;font-size:0.85rem;font-weight:500;color:var(--text-muted);border:1px solid transparent;transition:all 0.3s;" onmouseover="this.style.color='var(--text)';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='var(--text-muted)';this.style.background='transparent'">Expenses</a>
+  </div>
+ </div>
+</nav>
+<!-- === NAV END === -->
+
 <div class="bg-animation">
  <div class="stars"></div>
  <div class="bg-orb"></div>
+ <div class="bg-orb-2"></div>
 </div>
 
 <header>
@@ -1140,6 +1175,7 @@ function animateValue(id,end,duration){
 function updateTotal(){
  const total=data.reduce((sum,item)=>sum+item.amount,0);
  animateValue('totalAmount',total,2000);
+ try{localStorage.setItem('masjid_total_contributions',String(total));}catch(e){}
 }
 
 function renderTable(list){
@@ -1505,10 +1541,8 @@ updateTotal();
 renderTable(filteredData);
 updateSearchSummary('',data);
 setupScrollAnimations();
+try{localStorage.setItem('masjid_total_contributions',String(data.reduce((s,i)=>s+i.amount,0)));}catch(e){}
 </script>
 
 </body>
 </html>
-
-
-
