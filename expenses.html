@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imamnagar Masjid - Expenses</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --primary:#0f172a;
+ --secondary:#1e293b;
+ --accent:#f59e0b;
+ --accent-light:#fbbf24;
+ --danger:#ef4444;
+ --danger-light:#fca5a5;
+ --success:#10b981;
+ --success-light:#34d399;
+ --text:#f8fafc;
+ --text-muted:#94a3b8;
+ --glass:rgba(30,41,59,0.8);
+ --glass-light:rgba(30,41,59,0.5);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+ font-family:'Plus Jakarta Sans',sans-serif;
+ background:var(--primary);
+ color:var(--text);
+ line-height:1.6;
+ overflow-x:hidden;
+}
+
+/* ── Background ── */
+.bg-animation{
+ position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+ background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);
+ overflow:hidden;
+}
+.stars{
+ position:absolute;width:100%;height:100%;
+ background-image:
+  radial-gradient(2px 2px at 20px 30px,#eee,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 40px 70px,rgba(255,255,255,0.8),rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 50px 160px,#ddd,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 90px 40px,#fff,rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 130px 80px,rgba(255,255,255,0.6),rgba(0,0,0,0)),
+  radial-gradient(2px 2px at 160px 120px,#ddd,rgba(0,0,0,0));
+ background-repeat:repeat;background-size:200px 200px;
+ animation:twinkle 5s ease-in-out infinite;opacity:0.5;
+}
+.bg-orb{
+ position:absolute;width:40vw;height:40vw;max-width:420px;max-height:420px;
+ border-radius:50%;
+ background:radial-gradient(circle,rgba(245,158,11,0.22) 0%,rgba(245,158,11,0) 68%);
+ right:-10vw;top:10vh;filter:blur(6px);
+ animation:floatOrb 14s ease-in-out infinite;
+}
+.bg-orb-2{
+ position:absolute;width:30vw;height:30vw;max-width:320px;max-height:320px;
+ border-radius:50%;
+ background:radial-gradient(circle,rgba(16,185,129,0.12) 0%,rgba(16,185,129,0) 68%);
+ left:-8vw;bottom:15vh;filter:blur(8px);
+ animation:floatOrb2 18s ease-in-out infinite;
+}
+
+@keyframes twinkle{0%,100%{opacity:0.5;}50%{opacity:0.8;}}
+@keyframes floatOrb{0%,100%{transform:translate3d(0,0,0);}50%{transform:translate3d(-8vw,6vh,0);}}
+@keyframes floatOrb2{0%,100%{transform:translate3d(0,0,0);}50%{transform:translate3d(6vw,-5vh,0);}}
+
+/* ── Nav ── */
+.top-nav{
+ position:sticky;top:0;z-index:100;
+ background:rgba(15,23,42,0.88);
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+ border-bottom:1px solid rgba(255,255,255,0.08);
+ padding:0 2rem;
+ animation:slideDown 0.6s ease-out;
+}
+.nav-inner{
+ max-width:1200px;margin:0 auto;
+ display:flex;justify-content:space-between;align-items:center;
+ height:60px;
+}
+.nav-brand{
+ display:flex;align-items:center;gap:0.7rem;
+ text-decoration:none;color:var(--text);
+}
+.nav-brand-icon{
+ width:34px;height:34px;
+ background:linear-gradient(135deg,var(--accent),var(--accent-light));
+ border-radius:9px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:1rem;
+}
+.nav-brand-text{font-weight:700;font-size:0.95rem;}
+.nav-links{display:flex;gap:0.4rem;}
+.nav-link{
+ padding:0.45rem 1rem;border-radius:9px;
+ text-decoration:none;font-size:0.85rem;font-weight:500;
+ color:var(--text-muted);transition:all 0.3s;
+ border:1px solid transparent;
+}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+.nav-link.active{
+ color:var(--accent);
+ background:rgba(245,158,11,0.1);
+ border-color:rgba(245,158,11,0.25);
+}
+
+/* ── Header ── */
+.page-header{
+ text-align:center;padding:3rem 2rem 1rem;
+ animation:fadeInUp 0.8s ease-out;
+}
+.page-header h1{
+ font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;
+ background:linear-gradient(135deg,#fff 0%,var(--accent-light) 100%);
+ -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+ margin-bottom:0.3rem;
+}
+.page-header .urdu-title{
+ font-family:'Noto Nastaliq Urdu',serif;
+ font-size:clamp(1.6rem,3.5vw,2.4rem);
+ color:var(--accent);line-height:1.8;margin-bottom:0.5rem;
+}
+.page-header .subtitle{color:var(--text-muted);font-size:1rem;}
+
+/* ── Container ── */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem 4rem;}
+
+/* ── Sync Banner ── */
+.sync-banner{
+ display:flex;align-items:center;justify-content:center;gap:0.6rem;
+ padding:0.7rem 1.2rem;margin-bottom:1.5rem;
+ background:rgba(16,185,129,0.08);
+ border:1px solid rgba(16,185,129,0.2);
+ border-radius:12px;font-size:0.85rem;color:var(--success-light);
+ animation:fadeInUp 0.8s ease-out 0.05s backwards;
+}
+.sync-dot{
+ width:8px;height:8px;border-radius:50%;background:var(--success);
+ animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+/* ── Summary Cards ── */
+.summary-grid{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:1.5rem;margin-bottom:2rem;
+}
+.summary-card{
+ position:relative;padding:2rem 1.5rem;border-radius:20px;
+ overflow:hidden;border:1px solid rgba(255,255,255,0.08);
+ animation:fadeInUp 0.8s ease-out backwards;
+ transition:transform 0.3s,box-shadow 0.3s;
+}
+.summary-card:hover{
+ transform:translateY(-4px);
+ box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+.summary-card:nth-child(1){animation-delay:0.1s;}
+.summary-card:nth-child(2){animation-delay:0.2s;}
+.summary-card:nth-child(3){animation-delay:0.3s;}
+
+.card-expenses{
+ background:linear-gradient(145deg,rgba(239,68,68,0.15) 0%,rgba(239,68,68,0.03) 100%);
+ border-color:rgba(239,68,68,0.2);
+}
+.card-contributions{
+ background:linear-gradient(145deg,rgba(245,158,11,0.15) 0%,rgba(245,158,11,0.03) 100%);
+ border-color:rgba(245,158,11,0.2);
+}
+.card-balance{
+ background:linear-gradient(145deg,rgba(16,185,129,0.15) 0%,rgba(16,185,129,0.03) 100%);
+ border-color:rgba(16,185,129,0.2);
+}
+.card-balance.negative{
+ background:linear-gradient(145deg,rgba(239,68,68,0.2) 0%,rgba(239,68,68,0.05) 100%);
+ border-color:rgba(239,68,68,0.3);
+}
+
+.card-glow{
+ position:absolute;top:-40%;right:-30%;
+ width:180px;height:180px;border-radius:50%;
+ filter:blur(50px);opacity:0.4;pointer-events:none;
+}
+.card-expenses .card-glow{background:var(--danger);}
+.card-contributions .card-glow{background:var(--accent);}
+.card-balance .card-glow{background:var(--success);}
+.card-balance.negative .card-glow{background:var(--danger);}
+
+.card-icon{
+ width:48px;height:48px;border-radius:14px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:1.4rem;margin-bottom:1rem;position:relative;z-index:1;
+}
+.card-expenses .card-icon{background:rgba(239,68,68,0.2);}
+.card-contributions .card-icon{background:rgba(245,158,11,0.2);}
+.card-balance .card-icon{background:rgba(16,185,129,0.2);}
+.card-balance.negative .card-icon{background:rgba(239,68,68,0.2);}
+
+.card-label{
+ font-size:0.82rem;text-transform:uppercase;letter-spacing:0.15em;
+ color:var(--text-muted);margin-bottom:0.2rem;position:relative;z-index:1;
+}
+.card-label-urdu{
+ font-family:'Noto Nastaliq Urdu',serif;font-size:0.95rem;
+ color:var(--text-muted);direction:rtl;margin-bottom:0.6rem;
+ position:relative;z-index:1;line-height:1.8;
+}
+.card-amount{
+ font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;
+ position:relative;z-index:1;
+}
+.card-expenses .card-amount{color:var(--danger-light);}
+.card-contributions .card-amount{color:var(--accent-light);}
+.card-balance .card-amount{color:var(--success-light);}
+.card-balance.negative .card-amount{color:var(--danger-light);}
+
+/* ── Progress ── */
+.progress-section{
+ margin-bottom:2.5rem;
+ animation:fadeInUp 0.8s ease-out 0.4s backwards;
+}
+.progress-header{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:0.7rem;
+}
+.progress-title{font-size:0.88rem;color:var(--text-muted);}
+.progress-percent{font-size:1rem;font-weight:700;color:var(--accent);}
+.progress-bar-outer{
+ width:100%;height:16px;background:rgba(255,255,255,0.06);
+ border-radius:20px;overflow:hidden;position:relative;
+}
+.progress-bar-inner{
+ height:100%;border-radius:20px;
+ background:linear-gradient(90deg,var(--danger) 0%,var(--accent) 60%,var(--success) 100%);
+ position:relative;
+ transition:width 2s cubic-bezier(0.22,1,0.36,1);
+ width:0;
+}
+.progress-bar-inner::after{
+ content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+ background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.2) 50%,transparent 100%);
+ animation:shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.progress-labels{
+ display:flex;justify-content:space-between;margin-top:0.5rem;
+}
+.progress-label{
+ font-size:0.75rem;color:var(--text-muted);
+ display:flex;align-items:center;gap:0.35rem;
+}
+.progress-dot{width:7px;height:7px;border-radius:50%;}
+.progress-dot.expense{background:var(--danger);}
+.progress-dot.contribute{background:var(--accent);}
+.progress-dot.balance{background:var(--success);}
+
+/* ── Table ── */
+.table-container{
+ background:var(--glass);backdrop-filter:blur(20px);
+ border-radius:24px;overflow:hidden;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 25px 50px rgba(0,0,0,0.5);
+ animation:fadeInUp 0.8s ease-out 0.5s backwards;
+}
+.table-top{
+ padding:1.3rem 2rem;background:rgba(255,255,255,0.04);
+ display:flex;justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:0.8rem;
+ border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.table-top h3{font-size:1.1rem;display:flex;align-items:center;gap:0.5rem;}
+.table-count{
+ font-size:0.8rem;color:var(--text-muted);
+ background:rgba(255,255,255,0.06);
+ padding:0.25rem 0.7rem;border-radius:8px;
+}
+.table-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead{background:rgba(245,158,11,0.08);}
+th{
+ padding:0.9rem 1.5rem;text-align:left;font-weight:600;
+ color:var(--accent);text-transform:uppercase;font-size:0.73rem;
+ letter-spacing:0.1em;white-space:nowrap;
+}
+th:nth-child(3),th:last-child{text-align:right;}
+td{
+ padding:0.9rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.04);
+ transition:all 0.3s;
+}
+td:nth-child(3),td:last-child{text-align:right;}
+tbody tr{transition:all 0.3s;animation:fadeIn 0.5s ease-out backwards;}
+tbody tr:hover{background:rgba(245,158,11,0.06);}
+
+tbody tr.row-total{
+ background:rgba(239,68,68,0.08);
+ border-top:2px solid rgba(239,68,68,0.25);
+}
+tbody tr.row-total:hover{background:rgba(239,68,68,0.12);}
+tbody tr.row-total td{font-weight:700;color:var(--danger-light);font-size:1rem;}
+
+.item-name{font-weight:500;}
+.item-urdu{
+ font-family:'Noto Nastaliq Urdu',serif;font-size:0.88rem;
+ color:var(--text-muted);direction:rtl;line-height:1.8;margin-top:0.1rem;
+}
+.amount-cell{
+ font-weight:700;color:var(--accent);font-size:1rem;
+ font-variant-numeric:tabular-nums;
+}
+.row-total .amount-cell{color:var(--danger-light);font-size:1.05rem;}
+.row-number{
+ color:var(--text-muted);font-size:0.83rem;
+ font-variant-numeric:tabular-nums;min-width:30px;
+}
+
+/* Delete button (admin only) */
+.delete-btn{
+ background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);
+ color:var(--danger);border-radius:8px;padding:0.35rem 0.7rem;
+ cursor:pointer;font-size:0.78rem;font-weight:600;
+ transition:all 0.25s;white-space:nowrap;
+}
+.delete-btn:hover{
+ background:rgba(239,68,68,0.25);border-color:rgba(239,68,68,0.4);
+ transform:scale(1.05);
+}
+.delete-col{width:70px;}
+
+/* ── Breakdown ── */
+.breakdown-section{
+ margin-top:2.5rem;
+ animation:fadeInUp 0.8s ease-out 0.6s backwards;
+}
+.breakdown-title{
+ font-size:1.05rem;margin-bottom:1rem;
+ display:flex;align-items:center;gap:0.5rem;
+}
+.breakdown-grid{
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+ gap:0.9rem;
+}
+.breakdown-card{
+ background:var(--glass-light);backdrop-filter:blur(10px);
+ border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+ padding:1rem 1.1rem;transition:all 0.3s;
+ position:relative;overflow:hidden;
+}
+.breakdown-card:hover{
+ border-color:rgba(245,158,11,0.2);transform:translateY(-2px);
+ box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.breakdown-card-pct{
+ font-size:0.72rem;color:var(--text-muted);margin-bottom:0.15rem;
+}
+.breakdown-card-name{font-weight:600;font-size:0.88rem;margin-bottom:0.15rem;}
+.breakdown-card-urdu{
+ font-family:'Noto Nastaliq Urdu',serif;font-size:0.78rem;
+ color:var(--text-muted);direction:rtl;line-height:1.8;margin-bottom:0.4rem;
+}
+.breakdown-card-amount{font-weight:700;color:var(--accent);font-size:1.05rem;}
+.breakdown-card-bar{
+ position:absolute;bottom:0;left:0;height:3px;
+ background:linear-gradient(90deg,var(--accent),var(--accent-light));
+ border-radius:0 3px 0 0;
+ transition:width 1.5s cubic-bezier(0.22,1,0.36,1);
+ width:0;
+}
+
+/* ── Admin Lock ── */
+.admin-lock{
+ margin-top:3rem;text-align:center;
+ animation:fadeInUp 0.8s ease-out 0.7s backwards;
+}
+.lock-button{
+ display:inline-flex;align-items:center;gap:0.7rem;
+ padding:0.9rem 1.8rem;background:var(--glass);
+ border:2px solid rgba(255,255,255,0.1);border-radius:14px;
+ color:var(--text);cursor:pointer;font-size:0.95rem;
+ transition:all 0.3s;backdrop-filter:blur(10px);
+ font-family:inherit;
+}
+.lock-button:hover{
+ border-color:var(--accent);transform:translateY(-3px);
+ box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+.lock-icon{font-size:1.3rem;transition:transform 0.3s;}
+.lock-button:hover .lock-icon{transform:rotate(10deg);}
+
+/* ── Admin Panel ── */
+.admin-panel{
+ display:none;margin-top:2rem;
+ background:var(--glass);backdrop-filter:blur(20px);
+ border-radius:24px;padding:2.5rem;
+ border:1px solid rgba(255,255,255,0.1);
+ animation:slideDown 0.5s ease-out;
+}
+.admin-panel.active{display:block;}
+.panel-header{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:1.5rem;padding-bottom:1rem;
+ border-bottom:1px solid rgba(255,255,255,0.1);
+ flex-wrap:wrap;gap:0.8rem;
+}
+.panel-title{display:flex;align-items:center;gap:0.8rem;}
+.admin-badge{
+ background:var(--accent);color:var(--primary);
+ padding:0.25rem 0.7rem;border-radius:20px;
+ font-size:0.72rem;font-weight:700;text-transform:uppercase;
+}
+.logout-btn{
+ padding:0.45rem 0.9rem;
+ background:rgba(239,68,68,0.15);color:var(--danger);
+ border:1px solid rgba(239,68,68,0.25);border-radius:8px;
+ cursor:pointer;font-size:0.85rem;transition:all 0.3s;
+ font-family:inherit;
+}
+.logout-btn:hover{background:rgba(239,68,68,0.25);}
+.form-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:1.2rem;margin-bottom:1.2rem;
+}
+.form-group{}
+.form-label{
+ display:block;margin-bottom:0.4rem;color:var(--text-muted);
+ font-size:0.82rem;font-weight:500;
+}
+.form-input{
+ width:100%;padding:0.85rem 1rem;background:var(--primary);
+ border:2px solid rgba(255,255,255,0.1);border-radius:10px;
+ color:var(--text);font-size:0.95rem;transition:all 0.3s;
+ font-family:inherit;
+}
+.form-input:focus{outline:none;border-color:var(--accent);}
+.form-input::placeholder{color:rgba(148,163,184,0.5);}
+.submit-btn{
+ width:100%;padding:1rem;
+ background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);
+ border:none;border-radius:10px;color:var(--primary);
+ font-size:1rem;font-weight:700;cursor:pointer;
+ transition:all 0.3s;position:relative;overflow:hidden;
+ font-family:inherit;
+}
+.submit-btn::before{
+ content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+ transition:left 0.6s;
+}
+.submit-btn:hover::before{left:100%;}
+.submit-btn:hover{
+ transform:translateY(-2px);
+ box-shadow:0 12px 35px rgba(245,158,11,0.35);
+}
+
+.image-settings,.export-settings{
+ margin-top:1.5rem;padding-top:1.5rem;
+ border-top:1px solid rgba(255,255,255,0.1);
+}
+.image-settings h4,.export-settings h4{
+ margin-bottom:0.8rem;font-size:1rem;
+}
+.image-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.secondary-btn{
+ padding:0.75rem 1rem;border-radius:9px;
+ border:1px solid rgba(255,255,255,0.15);
+ background:rgba(255,255,255,0.05);color:var(--text);
+ cursor:pointer;transition:all 0.3s;font-size:0.88rem;
+ font-family:inherit;
+}
+.secondary-btn:hover{
+ border-color:var(--accent);background:rgba(245,158,11,0.12);
+}
+.danger-btn{
+ padding:0.75rem 1rem;border-radius:9px;
+ border:1px solid rgba(239,68,68,0.2);
+ background:rgba(239,68,68,0.08);color:var(--danger);
+ cursor:pointer;transition:all 0.3s;font-size:0.88rem;
+ font-family:inherit;
+}
+.danger-btn:hover{
+ border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.18);
+}
+
+/* ── Modal ── */
+.modal-overlay{
+ position:fixed;top:0;left:0;width:100%;height:100%;
+ background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);
+ display:none;justify-content:center;align-items:center;
+ z-index:1000;opacity:0;transition:opacity 0.3s;
+}
+.modal-overlay.active{display:flex;opacity:1;}
+.modal{
+ background:var(--secondary);padding:2.5rem;border-radius:24px;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 30px 60px rgba(0,0,0,0.5);
+ max-width:400px;width:90%;
+ transform:scale(0.9);transition:transform 0.3s;
+}
+.modal-overlay.active .modal{transform:scale(1);}
+.modal-title{font-size:1.4rem;margin-bottom:0.4rem;text-align:center;}
+.modal-subtitle{color:var(--text-muted);text-align:center;margin-bottom:1.5rem;font-size:0.88rem;}
+.password-input{
+ width:100%;padding:0.9rem;background:var(--primary);
+ border:2px solid rgba(255,255,255,0.1);border-radius:10px;
+ color:var(--text);font-size:1rem;text-align:center;
+ letter-spacing:0.2em;margin-bottom:0.8rem;font-family:inherit;
+}
+.password-input:focus{outline:none;border-color:var(--accent);}
+.modal-buttons{display:flex;gap:0.8rem;}
+.modal-btn{
+ flex:1;padding:0.85rem;border:none;border-radius:10px;
+ cursor:pointer;font-size:0.95rem;transition:all 0.3s;font-family:inherit;
+}
+.modal-btn.cancel{background:rgba(255,255,255,0.1);color:var(--text);}
+.modal-btn.cancel:hover{background:rgba(255,255,255,0.2);}
+.modal-btn.submit{background:var(--accent);color:var(--primary);font-weight:600;}
+.modal-btn.submit:hover{background:var(--accent-light);transform:translateY(-2px);}
+.error-msg{color:var(--danger);text-align:center;margin-top:0.4rem;font-size:0.85rem;display:none;}
+
+/* ── Toast ── */
+.toast{
+ position:fixed;bottom:2rem;right:2rem;
+ background:var(--glass);backdrop-filter:blur(20px);
+ padding:1rem 1.8rem;border-radius:14px;
+ border:1px solid rgba(255,255,255,0.1);
+ box-shadow:0 20px 40px rgba(0,0,0,0.4);
+ display:flex;align-items:center;gap:0.8rem;
+ transform:translateX(400px);
+ transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+ z-index:1000;max-width:350px;
+}
+.toast.show{transform:translateX(0);}
+.toast-icon{
+ width:40px;height:40px;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;
+ font-size:1.3rem;flex-shrink:0;
+}
+.toast-icon.success{background:rgba(16,185,129,0.2);}
+.toast-icon.error{background:rgba(239,68,68,0.2);}
+.toast-icon.info{background:rgba(245,158,11,0.2);}
+.toast-text{font-weight:600;font-size:0.9rem;}
+.toast-sub{color:var(--text-muted);font-size:0.8rem;}
+
+/* ── Footer ── */
+.footer-note{
+ text-align:center;padding:2rem;margin-top:2rem;
+ color:var(--text-muted);font-size:0.82rem;
+ border-top:1px solid rgba(255,255,255,0.06);
+ animation:fadeInUp 0.8s ease-out 0.8s backwards;
+}
+.footer-note .urdu{
+ font-family:'Noto Nastaliq Urdu',serif;font-size:0.95rem;
+ direction:rtl;color:var(--accent);line-height:2;margin-top:0.4rem;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+ .summary-grid{grid-template-columns:1fr;gap:1rem;}
+ .card-amount{font-size:2rem;}
+ .nav-links{gap:0.25rem;}
+ .nav-link{padding:0.4rem 0.65rem;font-size:0.8rem;}
+}
+@media(max-width:600px){
+ .container{padding:0 1rem 3rem;}
+ .page-header{padding:2rem 1rem 0.5rem;}
+ th,td{padding:0.7rem 1rem;font-size:0.82rem;}
+ .table-top{padding:1rem 1.2rem;}
+ .breakdown-grid{grid-template-columns:1fr 1fr;}
+ .nav-inner{height:54px;}
+ .nav-brand-text{display:none;}
+ .delete-col{width:50px;}
+ .delete-btn{padding:0.3rem 0.5rem;font-size:0.72rem;}
+ .admin-panel{padding:1.5rem;}
+ .form-grid{grid-template-columns:1fr;}
+}
+@media(max-width:400px){
+ .breakdown-grid{grid-template-columns:1fr;}
+}
+@media(hover:none){
+ .summary-card:hover,.breakdown-card:hover{transform:none;box-shadow:none;}
+ tbody tr:hover{background:transparent;}
+ tbody tr:active{background:rgba(245,158,11,0.06);}
+}
+@media(prefers-reduced-motion:reduce){
+ *{animation:none!important;transition:none!important;}
+ .progress-bar-inner{width:var(--tw)!important;}
+ .breakdown-card-bar{width:var(--tw)!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-animation">
+ <div class="stars"></div>
+ <div class="bg-orb"></div>
+ <div class="bg-orb-2"></div>
+</div>
+
+<!-- Nav -->
+<nav class="top-nav">
+ <div class="nav-inner">
+  <a href="#" class="nav-brand">
+   <div class="nav-brand-icon">🕌</div>
+   <span class="nav-brand-text">Imamnagar Masjid</span>
+  </a>
+  <div class="nav-links">
+   <a href="index.html" class="nav-link">Contributions</a>
+   <a href="expenses.html" class="nav-link active">Expenses</a>
+  </div>
+ </div>
+</nav>
+
+<!-- Header -->
+<header class="page-header">
+ <h1>Expense Details</h1>
+ <p class="urdu-title">اخراجات کی تفصیلات</p>
+ <p class="subtitle">Masjid Renovation & Maintenance Work</p>
+</header>
+
+<div class="container">
+
+
+ <!-- Summary Cards -->
+ <div class="summary-grid">
+  <div class="summary-card card-expenses">
+   <div class="card-glow"></div>
+   <div class="card-icon">📉</div>
+   <div class="card-label">Total Expenses</div>
+   <div class="card-label-urdu">کلاخراجات</div>
+   <div class="card-amount" id="expenseTotal">₹0</div>
+  </div>
+  <div class="summary-card card-contributions">
+   <div class="card-glow"></div>
+   <div class="card-icon">🤝</div>
+   <div class="card-label">Total Contributions</div>
+   <div class="card-label-urdu">کل تعاونات</div>
+   <div class="card-amount" id="contribTotal">₹0</div>
+  </div>
+  <div class="summary-card card-balance" id="balanceCard">
+   <div class="card-glow"></div>
+   <div class="card-icon" id="balanceIcon">💰</div>
+   <div class="card-label">Balance Remaining</div>
+   <div class="card-label-urdu">باقی بیلنس</div>
+   <div class="card-amount" id="balanceTotal">₹0</div>
+  </div>
+ </div>
+
+ <!-- Progress Bar -->
+ <div class="progress-section">
+  <div class="progress-header">
+   <span class="progress-title">Fund Utilization</span>
+   <span class="progress-percent" id="progressPercent">0%</span>
+  </div>
+  <div class="progress-bar-outer">
+   <div class="progress-bar-inner" id="progressBar"></div>
+  </div>
+  <div class="progress-labels">
+   <span class="progress-label"><span class="progress-dot expense"></span>Expenses</span>
+   <span class="progress-label"><span class="progress-dot balance"></span>Balance</span>
+   <span class="progress-label"><span class="progress-dot contribute"></span>Contributions</span>
+  </div>
+ </div>
+
+ <!-- Expense Table -->
+ <div class="table-container">
+  <div class="table-top">
+   <h3>📋 Expense Records</h3>
+   <span class="table-count" id="tableCount">0 items</span>
+  </div>
+  <div class="table-scroll">
+   <table>
+    <thead>
+     <tr>
+      <th>#</th>
+      <th>Expense Item</th>
+      <th>Amount (₹)</th>
+      <th class="delete-col" id="deleteHeader" style="display:none;">Action</th>
+     </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+   </table>
+  </div>
+ </div>
+
+ <!-- Breakdown -->
+ <div class="breakdown-section">
+  <h3 class="breakdown-title">📊 Expense Breakdown</h3>
+  <div class="breakdown-grid" id="breakdownGrid"></div>
+ </div>
+
+ <!-- Admin Lock -->
+ <div class="admin-lock" id="adminLock">
+  <button class="lock-button" onclick="openModal()" aria-label="Open admin login">
+   <span class="lock-icon">🔒</span>
+   <span>Admin Access</span>
+  </button>
+ </div>
+
+ <!-- Admin Panel -->
+ <div class="admin-panel" id="adminPanel">
+  <div class="panel-header">
+   <div class="panel-title">
+    <h3>Add New Expense</h3>
+    <span class="admin-badge">Admin</span>
+   </div>
+   <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+  <form id="addForm" onsubmit="handleAddExpense(event)">
+   <div class="form-grid">
+    <div class="form-group">
+     <label class="form-label">Item Name (Hindi/English) *</label>
+     <input type="text" id="expName" class="form-input" placeholder="e.g. Paint Bucket" required>
+    </div>
+    <div class="form-group">
+     <label class="form-label">Urdu Name (اردو)</label>
+     <input type="text" id="expUrdu" class="form-input" placeholder="e.g. پینٹ بالٹی" dir="rtl">
+    </div>
+    <div class="form-group">
+     <label class="form-label">Amount (₹) *</label>
+     <input type="number" id="expAmount" class="form-input" placeholder="Enter amount" min="1" required>
+    </div>
+   </div>
+   <button type="submit" class="submit-btn">Add Expense</button>
+  </form>
+
+  <div class="export-settings">
+   <h4>Export & Reset</h4>
+   <div class="image-actions">
+    <button type="button" class="secondary-btn" onclick="downloadExcel()">Download Excel</button>
+    <button type="button" class="danger-btn" onclick="resetToDefault()">Reset to Default Data</button>
+   </div>
+  </div>
+ </div>
+
+ <!-- Footer -->
+ <div class="footer-note">
+  <p>Imamnagar Masjid — Renovation & Maintenance Account</p>
+  <p class="urdu">امامنگر مسجد — تجدیدات اور تعمیرات کا اکاؤنٹ</p>
+ </div>
+
+</div>
+
+<!-- Password Modal -->
+<div class="modal-overlay" id="passwordModal">
+ <div class="modal">
+  <h3 class="modal-title">🔐 Admin Login</h3>
+  <p class="modal-subtitle">Enter password to manage expenses</p>
+  <input type="password" id="passwordInput" class="password-input" placeholder="••••••" maxlength="64" autocomplete="current-password">
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="modal-buttons">
+   <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+   <button class="modal-btn submit" onclick="checkPassword()">Unlock</button>
+  </div>
+ </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+ <div class="toast-icon success" id="toastIcon">✓</div>
+ <div>
+  <div class="toast-text" id="toastText">Success!</div>
+  <div class="toast-sub" id="toastSub">Done</div>
+ </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+/* ── Constants ── */
+const LS_EXPENSES_KEY = 'masjid_expenses';
+const LS_CONTRIB_KEY = 'masjid_total_contributions';
+const ADMIN_PASSWORD_SALT = 'imamnagar-admin-v1';
+const ADMIN_PASSWORD_HASH = '33d1e7bf335e4ba45096df95ef293f2d0d3ebd3d622ad592cbc580c8dc626621';
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOGIN_LOCK_MS = 30000;
+
+/* ── Default Expense Data ── */
+const DEFAULT_EXPENSES = [
+ { name:"Paint Bucket",         urdu:"پینٹ بالٹی",          amount:20000 },
+ { name:"Brush & Rope",         urdu:"برش اور رسی",        amount:924   },
+ { name:"Cement Putty",         urdu:"سیمنٹ پٹی",          amount:720   },
+ { name:"Primer Color",         urdu:"پرائمر کلر",         amount:15815 },
+ { name:"Sand",                 urdu:"ریت",                amount:300   },
+ { name:"Vehicle Charge",       urdu:"گاڑی کا کرایہ",      amount:200   },
+ { name:"Color & Brush",        urdu:"کلر اور برش",        amount:10185 },
+ { name:"Putty",                urdu:"پٹی",                amount:1800  },
+ { name:"Pipe",                 urdu:"پائپ",               amount:200   },
+ { name:"Paint Tin",            urdu:"پینٹ ٹن",            amount:400   },
+ { name:"Wire & Light (Meter)", urdu:"تار اور لائٹ (میٹر)",amount:2520  },
+ { name:"Camera Associates",    urdu:"کیمرہ ایسوسی ایٹس",  amount:2440  },
+ { name:"Masjid Mosalla",       urdu:"مسجد مصلٰی",           amount:5500  },
+ { name:"Painter Mistry Charge",urdu:"پینٹر مستری چارج",   amount:34800 },
+ { name:"Mason (Raj Mistri)",   urdu:"رج مستری چارج",     amount:2800  },
+ { name:"Plumber Charge",       urdu:"پلمبر چارج",         amount:2000  }
+];
+
+/* ── State ── */
+let expenses = [];
+let isAdmin = false;
+let failedLoginAttempts = 0;
+let loginLockUntil = 0;
+
+/* ── Utility ── */
+function formatCurrency(n) {
+ return '₹' + Math.max(0, Number(n) || 0).toLocaleString('en-IN');
+}
+
+function escapeHtml(t) {
+ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function getContribTotal() {
+ try {
+  const v = localStorage.getItem(LS_CONTRIB_KEY);
+  if (v) return Number(v) || 0;
+ } catch(e) {}
+ return 163000; // fallback
+}
+
+function getExpenseTotal() {
+ return expenses.reduce((s, e) => s + e.amount, 0);
+}
+
+/* ── Animate Counter ── */
+function animateValue(el, end, dur = 1400) {
+ if (!el) return;
+ const target = Math.max(0, Number(end) || 0);
+ const from = Math.max(0, Number(el.dataset.value) || 0);
+ const start = performance.now();
+ const ease = t => 1 - Math.pow(1 - t, 3);
+ function frame(now) {
+  const p = Math.min((now - start) / dur, 1);
+  el.textContent = formatCurrency(Math.round(from + (target - from) * ease(p)));
+  if (p < 1) requestAnimationFrame(frame);
+  else el.dataset.value = String(target);
+ }
+ requestAnimationFrame(frame);
+}
+
+/* ── Save / Load Expenses ── */
+function saveExpenses() {
+ try { localStorage.setItem(LS_EXPENSES_KEY, JSON.stringify(expenses)); } catch(e) {}
+}
+
+function loadExpenses() {
+ try {
+  const raw = localStorage.getItem(LS_EXPENSES_KEY);
+  if (raw) {
+   const parsed = JSON.parse(raw);
+   if (Array.isArray(parsed) && parsed.length > 0) {
+    expenses = parsed;
+    return;
+   }
+  }
+ } catch(e) {}
+ expenses = JSON.parse(JSON.stringify(DEFAULT_EXPENSES));
+ saveExpenses();
+}
+
+/* ── Render Table ── */
+function renderTable() {
+ const tbody = document.getElementById('tableBody');
+ const countEl = document.getElementById('tableCount');
+ const deleteHeader = document.getElementById('deleteHeader');
+ const total = getExpenseTotal();
+
+ countEl.textContent = expenses.length + ' items';
+ deleteHeader.style.display = isAdmin ? '' : 'none';
+
+ let html = '';
+ expenses.forEach((item, i) => {
+  html += '<tr style="animation-delay:' + (i * 0.03) + 's">' +
+   '<td class="row-number">' + String(i + 1).padStart(2, '0') + '</td>' +
+   '<td><div class="item-name">' + escapeHtml(item.name) + '</div>' +
+   (item.urdu ? '<div class="item-urdu">' + escapeHtml(item.urdu) + '</div>' : '') +
+   '</td>' +
+   '<td class="amount-cell">' + formatCurrency(item.amount) + '</td>' +
+   '<td class="delete-col" style="' + (isAdmin ? '' : 'display:none') + '">' +
+   '<button class="delete-btn" onclick="deleteExpense(' + i + ')" title="Delete">✕</button>' +
+   '</td></tr>';
+ });
+
+ html += '<tr class="row-total" style="animation-delay:' + (expenses.length * 0.03) + 's">' +
+  '<td></td>' +
+  '<td><div>Total Expenses / کلاخراجات</div></td>' +
+  '<td class="amount-cell">' + formatCurrency(total) + '</td>' +
+  '<td style="' + (isAdmin ? '' : 'display:none') + '"></td></tr>';
+
+ tbody.innerHTML = html;
+}
+
+/* ── Render Breakdown ── */
+function renderBreakdown() {
+ const grid = document.getElementById('breakdownGrid');
+ const total = getExpenseTotal();
+ const maxAmt = expenses.length > 0 ? Math.max(...expenses.map(e => e.amount)) : 1;
+ const sorted = [...expenses].sort((a, b) => b.amount - a.amount);
+
+ grid.innerHTML = sorted.map((item, i) => {
+  const pct = total > 0 ? (item.amount / total * 100) : 0;
+  const barW = (item.amount / maxAmt * 100);
+  return '<div class="breakdown-card" style="animation:fadeInUp 0.5s ease-out ' + (0.05 + i * 0.04) + 's backwards">' +
+   '<div class="breakdown-card-pct">' + pct.toFixed(1) + '% of total</div>' +
+   '<div class="breakdown-card-name">' + escapeHtml(item.name) + '</div>' +
+   (item.urdu ? '<div class="breakdown-card-urdu">' + escapeHtml(item.urdu) + '</div>' : '') +
+   '<div class="breakdown-card-amount">' + formatCurrency(item.amount) + '</div>' +
+   '<div class="breakdown-card-bar" style="--tw:' + barW.toFixed(1) + '%"></div></div>';
+ }).join('');
+
+ setTimeout(() => {
+  grid.querySelectorAll('.breakdown-card-bar').forEach(bar => {
+   bar.style.width = bar.style.getPropertyValue('--tw');
+  });
+ }, 600);
+}
+
+/* ── Animate Summary ── */
+function animateSummary() {
+ const totalExp = getExpenseTotal();
+ const totalContrib = getContribTotal();
+ const balance = totalContrib - totalExp;
+ const pct = totalContrib > 0 ? Math.min((totalExp / totalContrib * 100), 100) : 0;
+
+ animateValue(document.getElementById('expenseTotal'), totalExp, 1800);
+ animateValue(document.getElementById('contribTotal'), totalContrib, 1800);
+
+ // Balance card styling
+ const balCard = document.getElementById('balanceCard');
+ const balIcon = document.getElementById('balanceIcon');
+ if (balance < 0) {
+  balCard.classList.add('negative');
+  balIcon.textContent = '⚠️';
+ } else {
+  balCard.classList.remove('negative');
+  balIcon.textContent = '💰';
+ }
+ animateValue(document.getElementById('balanceTotal'), Math.abs(balance), 2000);
+ if (balance < 0) {
+  setTimeout(() => {
+   const el = document.getElementById('balanceTotal');
+   el.textContent = '-' + el.textContent;
+  }, 2100);
+ }
+
+ // Progress bar
+ const bar = document.getElementById('progressBar');
+ const pctEl = document.getElementById('progressPercent');
+ bar.style.setProperty('--tw', pct.toFixed(1) + '%');
+ setTimeout(() => { bar.style.width = pct.toFixed(1) + '%'; }, 300);
+
+ let cur = 0;
+ const step = pct / 50;
+ function tick() {
+  cur = Math.min(cur + step, pct);
+  pctEl.textContent = cur.toFixed(1) + '%';
+  if (cur < pct) requestAnimationFrame(tick);
+ }
+ setTimeout(tick, 300);
+}
+
+/* ── Full Refresh ── */
+function refreshAll() {
+ renderTable();
+ renderBreakdown();
+ animateSummary();
+}
+
+/* ── Admin: Add Expense ── */
+function handleAddExpense(e) {
+ e.preventDefault();
+ const name = document.getElementById('expName').value.trim();
+ const urdu = document.getElementById('expUrdu').value.trim();
+ const amount = parseInt(document.getElementById('expAmount').value);
+
+ if (!name || !amount || amount < 1) return;
+
+ expenses.push({ name, urdu, amount });
+ saveExpenses();
+ document.getElementById('addForm').reset();
+ showToast('success', 'Expense Added', name + ' — ' + formatCurrency(amount));
+ refreshAll();
+}
+
+/* ── Admin: Delete Expense ── */
+function deleteExpense(index) {
+ if (!isAdmin) return;
+ if (index < 0 || index >= expenses.length) return;
+ const removed = expenses[index];
+ expenses.splice(index, 1);
+ saveExpenses();
+ showToast('error', 'Expense Removed', removed.name + ' — ' + formatCurrency(removed.amount));
+ refreshAll();
+}
+
+/* ── Admin: Reset ── */
+function resetToDefault() {
+ if (!isAdmin) return;
+ expenses = JSON.parse(JSON.stringify(DEFAULT_EXPENSES));
+ saveExpenses();
+ showToast('info', 'Reset Done', 'Expenses restored to default data');
+ refreshAll();
+}
+
+/* ── Export Excel ── */
+function downloadExcel() {
+ if (typeof XLSX === 'undefined') {
+  showToast('error', 'Error', 'Excel library not loaded. Refresh the page.');
+  return;
+ }
+ const totalExp = getExpenseTotal();
+ const totalContrib = getContribTotal();
+ const balance = totalContrib - totalExp;
+
+ const rows = expenses.map((item, i) => ({
+  'S.No': i + 1,
+  'Item Name': item.name,
+  'Urdu Name': item.urdu || '',
+  'Amount (₹)': item.amount
+ }));
+
+ rows.push({ 'S.No': '', 'Item Name': 'TOTAL EXPENSES', 'Urdu Name': 'کلاخراجات', 'Amount (₹)': totalExp });
+ rows.push({ 'S.No': '', 'Item Name': 'TOTAL CONTRIBUTIONS', 'Urdu Name': 'کل تعاونات', 'Amount (₹)': totalContrib });
+ rows.push({ 'S.No': '', 'Item Name': 'BALANCE', 'Urdu Name': 'باقی بیلنس', 'Amount (₹)': balance });
+
+ const ws = XLSX.utils.json_to_sheet(rows);
+ const wb = XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(wb, ws, 'Expenses');
+ XLSX.writeFile(wb, 'imamnagar_expenses_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+ showToast('success', 'Downloaded', 'Excel file saved successfully');
+}
+
+/* ── Password ── */
+async function sha256Hex(input) {
+ const data = new TextEncoder().encode(input);
+ const digest = await crypto.subtle.digest('SHA-256', data);
+ return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkPassword() {
+ const now = Date.now();
+ if (now < loginLockUntil) {
+  const sec = Math.ceil((loginLockUntil - now) / 1000);
+  setError('Locked. Try again in ' + sec + 's.');
+  return;
+ }
+ const input = document.getElementById('passwordInput').value;
+ if (!input) { setError('Please enter password.'); return; }
+
+ const valid = await sha256Hex(ADMIN_PASSWORD_SALT + ':' + input) === ADMIN_PASSWORD_HASH;
+ if (valid) {
+  failedLoginAttempts = 0;
+  loginLockUntil = 0;
+  closeModal();
+  isAdmin = true;
+  document.getElementById('adminLock').style.display = 'none';
+  document.getElementById('adminPanel').classList.add('active');
+  showToast('success', 'Access Granted', 'Admin panel unlocked');
+  renderTable(); // re-render to show delete buttons
+ } else {
+  failedLoginAttempts++;
+  if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+   loginLockUntil = Date.now() + LOGIN_LOCK_MS;
+   failedLoginAttempts = 0;
+   setError('Too many attempts. Locked for 30s.');
+  } else {
+   setError('Wrong password! ' + (MAX_LOGIN_ATTEMPTS - failedLoginAttempts) + ' attempt(s) left.');
+  }
+  document.getElementById('passwordInput').value = '';
+  document.getElementById('passwordInput').focus();
+ }
+}
+
+function setError(msg) {
+ const el = document.getElementById('errorMsg');
+ el.textContent = msg; el.style.display = 'block';
+}
+
+function openModal() {
+ document.getElementById('passwordModal').classList.add('active');
+ document.getElementById('passwordInput').value = '';
+ document.getElementById('errorMsg').style.display = 'none';
+ setTimeout(() => document.getElementById('passwordInput').focus(), 100);
+}
+
+function closeModal() {
+ document.getElementById('passwordModal').classList.remove('active');
+}
+
+function logout() {
+ isAdmin = false;
+ document.getElementById('adminPanel').classList.remove('active');
+ document.getElementById('adminLock').style.display = '';
+ renderTable(); // hide delete buttons
+}
+
+// Enter key on password
+document.getElementById('passwordInput').addEventListener('keypress', e => {
+ if (e.key === 'Enter') checkPassword();
+});
+
+// Close modal on overlay click
+document.getElementById('passwordModal').addEventListener('click', e => {
+ if (e.target === document.getElementById('passwordModal')) closeModal();
+});
+
+/* ── Toast ── */
+let toastTimer = null;
+function showToast(type, title, sub) {
+ const toast = document.getElementById('toast');
+ const icon = document.getElementById('toastIcon');
+ document.getElementById('toastText').textContent = title;
+ document.getElementById('toastSub').textContent = sub;
+
+ icon.className = 'toast-icon ' + type;
+ icon.textContent = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+
+ toast.classList.add('show');
+ clearTimeout(toastTimer);
+ toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+/* ── Auto-sync: Listen for changes from other tab ── */
+window.addEventListener('storage', function(e) {
+ if (e.key === LS_CONTRIB_KEY) {
+  refreshAll();
+ }
+});
+
+/* ── Also poll every 3 seconds (backup sync) ── */
+let lastKnownContrib = getContribTotal();
+setInterval(() => {
+ const current = getContribTotal();
+ if (current !== lastKnownContrib) {
+  lastKnownContrib = current;
+  refreshAll();
+ }
+}, 3000);
+
+/* ── Initialize ── */
+loadExpenses();
+refreshAll();
+</script>
+</body>
+</html>
